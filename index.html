@@ -1,16 +1,263 @@
 <!DOCTYPE html>
-<html>
-	<link rel="stylesheet" type="text/css" href="nadiawebsite.css">
-	<head>
-		<meta charset="utf-8">
-	</head>
-	<body>
-		<h1>
-			My travel journal
-		</h1>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Monochrome Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg: #FFFFFF;
+      --color-primary: #333333;
+      --color-accent: #777777;
+      --color-dark: #111111;
+      --transition: 0.3s ease;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--color-bg);
+      color: var(--color-dark);
+      line-height: 1.6;
+    }
+    a { text-decoration: none; color: var(--color-primary); transition: color var(--transition); }
+    a:hover { color: var(--color-accent); }
 
-		<p>
-			Share your journey with me
-		</p>
-	</body>
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      background: var(--color-bg);
+      border-bottom: 1px solid var(--color-accent);
+      z-index: 100;
+    }
+    nav .logo { font-family: 'Poppins', sans-serif; font-size: 1.5rem; color: var(--color-dark); }
+    nav ul { display: flex; list-style: none; gap: 1.5rem; }
+
+    .hero {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      text-align: left;
+      min-height: 60vh;
+      padding: 4rem 2rem;
+      background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-primary) 100%);
+      color: var(--color-bg);
+      clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
+    }
+    .hero h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+    .hero .btn {
+      background: var(--color-bg);
+      color: var(--color-dark);
+      padding: 0.75rem 1.5rem;
+      border-radius: 2rem;
+      font-weight: 500;
+      transition: background var(--transition), color var(--transition);
+    }
+    .hero .btn:hover { background: var(--color-accent); color: var(--color-bg); }
+
+    .container { max-width: 1000px; margin: auto; padding: 4rem 2rem; }
+    .section-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2rem;
+      position: relative;
+      display: inline-block;
+      margin-bottom: 2rem;
+      color: var(--color-dark);
+    }
+    .section-title::after {
+      content: '';
+      width: 50px;
+      height: 4px;
+      background: var(--color-primary);
+      position: absolute;
+      left: 0; bottom: -8px;
+    }
+
+    #about p { max-width: 700px; color: var(--color-primary); }
+
+    #skills .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 1rem;
+    }
+    .skill {
+      background: var(--color-bg);
+      border: 2px solid var(--color-primary);
+      color: var(--color-primary);
+      padding: 1rem;
+      border-radius: 0.5rem;
+      text-align: center;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .skill:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+
+    #projects .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+    .project-card {
+      background: #f7f7f7;
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .project-card img {
+      width: 100%; height: 160px; object-fit: contain;
+      background: var(--color-bg);
+      padding: 1rem;
+    }
+    .project-card .content {
+      padding: 1.5rem;
+    }
+    .project-card h3 {
+      font-family: 'Poppins', sans-serif;
+      margin-bottom: 0.5rem;
+      color: var(--color-dark);
+    }
+    .project-card p { font-size: 0.95rem; margin-bottom: 1rem; color: var(--color-primary); }
+    .project-card a {
+      font-weight: 600;
+      display: inline-block;
+      position: relative;
+      color: var(--color-dark);
+    }
+    .project-card a::after {
+      content: '';
+      width: 0;
+      height: 2px;
+      background: var(--color-primary);
+      position: absolute;
+      left: 0; bottom: -2px;
+      transition: width var(--transition);
+    }
+    .project-card a:hover::after { width: 100%; }
+    .project-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.1); }
+
+    #contact form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 500px;
+    }
+    #contact input, #contact textarea {
+      padding: 0.75rem;
+      border: 1px solid var(--color-accent);
+      border-radius: 0.5rem;
+      font-family: inherit;
+      transition: border-color var(--transition);
+      color: var(--color-primary);
+      background: var(--color-bg);
+    }
+    #contact input:focus, #contact textarea:focus { border-color: var(--color-dark); outline: none; }
+    #contact .btn-primary {
+      background: var(--color-dark);
+      color: var(--color-bg);
+      padding: 0.75rem 1.5rem;
+      border-radius: 2rem;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      align-self: flex-start;
+      transition: background var(--transition);
+    }
+    #contact .btn-primary:hover { background: var(--color-primary); }
+
+    footer { text-align: center; padding: 2rem; font-size: 0.9rem; color: var(--color-accent); }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="logo">Lily</div>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <h1>Hello, I'm Lily</h1>
+    <p>Designer & Project Manager crafting digital experiences.</p>
+    <a href="#projects" class="btn">View Work</a>
+  </section>
+
+  <section id="about" class="container">
+    <h2 class="section-title">About Me</h2>
+    <p>I’m a multifaceted creative professional blending design thinking with strategic project leadership. With over 6 years in tech and design, I bridge the gap between users and technology to deliver meaningful experiences.</p>
+  </section>
+
+  <section id="skills" class="container">
+    <h2 class="section-title">Skills</h2>
+    <div class="grid">
+      <div class="skill">UI/UX Design</div>
+      <div class="skill">Project Management</div>
+      <div class="skill">Figma & Sketch</div>
+      <div class="skill">HTML & CSS</div>
+      <div class="skill">JavaScript</div>
+      <div class="skill">React.js</div>
+    </div>
+  </section>
+
+  <section id="projects" class="container">
+    <h2 class="section-title">Selected Projects</h2>
+    <div class="grid">
+      <div class="project-card">
+        <img src="assets/logos/robofun-logo.png" alt="Robofun Logo">
+        <div class="content">
+          <h3>Robofun AMR Interface</h3>
+          <p>Interactive dashboard design for autonomous mobile robots in smart warehouses.</p>
+          <a href="#">View Details →</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <img src="assets/logos/ai4u-logo.png" alt="AI4U Logo">
+        <div class="content">
+          <h3>AI4U Dashboard</h3>
+          <p>Data visualization platform for AI adoption metrics across university partners.</p>
+          <a href="#">View Details →</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <img src="assets/logos/smartcity-logo.png" alt="Smart City Logo">
+        <div class="content">
+          <h3>Smart City Portal</h3>
+          <p>User-centric portal design for municipal services and citizen engagement.</p>
+          <a href="#">View Details →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="container">
+    <h2 class="section-title">Get In Touch</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea rows="5" placeholder="Your Message"></textarea>
+      <button type="submit" class="btn-primary">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    © 2025 Lily. Designed & Developed with ❤️
+  </footer>
+</body>
 </html>
